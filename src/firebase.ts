@@ -5,18 +5,19 @@ import {
     User,
     signInWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
-import Config from "react-native-config";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 
+// Eu tentei meu máximo para fazer
+// o react-native-dotenv funcionar
 const firebaseConfig: FirebaseOptions = {
-    apiKey: Config.API_KEY,
-    authDomain: Config.AUTH_DOMAIN,
-    appId: Config.APP_ID,
-    databaseURL: Config.DATABASE_URL,
-    measurementId: Config.MEASUREMENT_ID,
-    messagingSenderId: Config.MESSAGING_SENDER_ID,
-    projectId: Config.PROJECT_ID,
-    storageBucket: Config.STORAGE_BUCKET,
+    apiKey: "AIzaSyBWBuovCqPbtXeyCBBhnjG08IPiBKKUaPs",
+    authDomain: "ricette-dev.firebaseapp.com",
+    appId: "1:766419493974:web:d0f6b7281c0332405d07f7",
+    databaseURL: "https://ricette-dev-default-rtdb.firebaseio.com",
+    measurementId: "G-2K72MBHFNW",
+    messagingSenderId: "766419493974",
+    projectId: "ricette-dev",
+    storageBucket: "ricette-dev.appspot.com",
 };
 
 export const app = initializeApp(firebaseConfig, "Ricette");
@@ -50,6 +51,17 @@ export async function setOrCreateUserDocument(user: User, userData?: UserData) {
     } else {
         console.error("Argument 'user' is not valid / is null");
     }
+}
+
+export async function checkIfUserIsSetUp(user: User): Promise<bool> {
+    if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+        }
+    }
+
+    return null;
 }
 
 export type UserData = {
