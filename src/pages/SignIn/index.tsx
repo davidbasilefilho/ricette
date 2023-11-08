@@ -1,6 +1,6 @@
 import { TextInput, View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { signIn, user } from "../../firebase";
+import { setOrCreateUserDocument, signIn, user } from "../../firebase";
 import styles, { colors } from "../../styles";
 import { useEffect, useState } from "react";
 
@@ -17,6 +17,7 @@ export function SignIn() {
     const submit = () => {
         if (email && pass && passConf && pass === passConf) {
             setRes(signIn(email, pass));
+            setOrCreateUserDocument(user);
             if (user) nav.navigate("Tastes");
         }
     };

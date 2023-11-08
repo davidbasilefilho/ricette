@@ -28,9 +28,7 @@ export function Tastes() {
             setCategoriaId(categoriaId + 1);
         }
 
-        if (categoriaId >= categorias.length) {
-            submit();
-        }
+        submit();
     };
 
     const addDislike = async () => {
@@ -46,9 +44,7 @@ export function Tastes() {
             setCategoriaId(categoriaId + 1);
         }
 
-        if (categoriaId >= categorias.length) {
-            submit();
-        }
+        submit();
     };
 
     return (
@@ -83,7 +79,7 @@ export function Tastes() {
                             borderRadius: 12,
                             backgroundColor: colors.reds[3],
                         }}
-                        onPress={() => addDislike()}
+                        onPress={addDislike}
                     ></Pressable>
                     <View style={{ width: "100%" }}></View>
                     <Pressable
@@ -92,7 +88,7 @@ export function Tastes() {
                             borderRadius: 12,
                             backgroundColor: colors.greens[3],
                         }}
-                        onPress={() => addLike()}
+                        onPress={addLike}
                     ></Pressable>
                 </View>
             </>
