@@ -54,30 +54,29 @@ export function logIn(email: string, pass: string): string {
     return res != "" ? res : "unknown";
 }
 
-export async function setOrCreateUserDocument(user: User, userData?: UserData) {
-    if (user) {
-        await setDoc(
-            doc(db, "users", user.uid),
-            userData ??
-                ({
-                    name: "",
-                    saved: [],
-                    likes: [],
-                    dislikes: [],
-                } as UserData)
-        );
-    } else {
-        console.error("Argument 'user' is not valid / is null");
-    }
+export function setOrCreateUserDocument(user: User, userData?: UserData) {
+    setDoc(
+        doc(db, "users", user.uid),
+        userData ??
+            ({
+                name: "",
+                saved: [],
+                likes: [],
+                dislikes: [],
+            } as UserData)
+    );
 }
 
-export async function getUserData(user: User): Promise<void> {
+export async function getUserData(user: User): Promise<UserData | undefined> {
     if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|;");
+            return docSnap.data as unknown as UserData;
         }
     }
+    return undefined;
 }
 
 export type UserData = {

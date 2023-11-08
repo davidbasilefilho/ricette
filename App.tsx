@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Home } from "./src/pages/Home/index";
+import { Beginning } from "./src/pages/Beginning/index";
 import { SignIn } from "./src/pages/SignIn/index";
 import { Tastes } from "./src/pages/Tastes/index";
 import { LogIn } from "./src/pages/LogIn/index";
@@ -19,6 +20,13 @@ export default function App() {
                     }}
                 />
                 <Menu.Screen
+                    name="Beginning"
+                    component={Beginning}
+                    options={{
+                        title: "Página inicial",
+                    }}
+                />
+                <Menu.Screen
                     name="SignIn"
                     component={SignIn}
                     options={{
@@ -31,6 +39,7 @@ export default function App() {
                     component={Tastes}
                     options={{
                         title: "Determinar gostos",
+                        headerShown: false,
                     }}
                 />
                 <Menu.Screen
