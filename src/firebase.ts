@@ -24,16 +24,34 @@ export const app = initializeApp(firebaseConfig, "Ricette");
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export function signIn(email: string, pass: string) {
-    createUserWithEmailAndPassword(auth, email, pass).catch((error) => {
-        console.error("Sign In error: ", error);
-    });
+export let user: User;
+
+export function signIn(email: string, pass: string): string {
+    let res = "";
+    createUserWithEmailAndPassword(auth, email, pass)
+        .then((userCredential) => {
+            user = userCredential.user;
+            res = "Success";
+        })
+        .catch((error) => {
+            console.error("Sign In error: ", error);
+            res = error.message;
+        });
+    return res != "" ? res : "unknown";
 }
 
-export function logIn(email: string, pass: string) {
-    signInWithEmailAndPassword(auth, email, pass).catch((error) => {
-        console.error("Log in error: ", error);
-    });
+export function logIn(email: string, pass: string): string {
+    let res = "";
+    signInWithEmailAndPassword(auth, email, pass)
+        .then((userCredential) => {
+            user = userCredential.user;
+            res = "Success";
+        })
+        .catch((error) => {
+            console.error("Log in error: ", error);
+            res = error.message;
+        });
+    return res != "" ? res : "unknown";
 }
 
 export async function setOrCreateUserDocument(user: User, userData?: UserData) {
@@ -53,15 +71,13 @@ export async function setOrCreateUserDocument(user: User, userData?: UserData) {
     }
 }
 
-export async function checkIfUserIsSetUp(user: User): Promise<bool> {
+export async function getUserData(user: User): Promise<void> {
     if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
         }
     }
-
-    return null;
 }
 
 export type UserData = {

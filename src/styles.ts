@@ -45,6 +45,13 @@ const styles = StyleSheet.create({
     whiteTxt: {
         color: colors.whites[0],
     },
+    blueCard: {
+        backgroundColor: colors.blues[0],
+        borderColor: colors.blues[2],
+        borderWidth: 1,
+        padding: 12,
+        borderRadius: 8,
+    },
 });
 
 export default styles;

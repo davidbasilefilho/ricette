@@ -1,13 +1,12 @@
 import { TextInput, View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { signIn, user } from "../../firebase";
+import { logIn, user } from "../../firebase";
 import styles, { colors } from "../../styles";
 import { useEffect, useState } from "react";
 
-export function SignIn() {
+export function LogIn() {
     const [email, setEmail] = useState<string>("");
     const [pass, setPass] = useState<string>("");
-    const [passConf, setPassConf] = useState<string>("");
     const [hide, setHide] = useState<boolean>(true);
     const [hideTxt, setHideTxt] = useState<string>("");
 
@@ -15,8 +14,8 @@ export function SignIn() {
 
     const [res, setRes] = useState<string>("");
     const submit = () => {
-        if (email && pass && passConf && pass === passConf) {
-            setRes(signIn(email, pass));
+        if (email && pass) {
+            setRes(logIn(email, pass));
             if (user) nav.navigate("Tastes");
         }
     };
@@ -65,46 +64,21 @@ export function SignIn() {
                         <Text>{hideTxt}</Text>
                     </Pressable>
                 </View>
-
-                <View
-                    style={{
-                        flex: 1,
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 8,
-                    }}
-                >
-                    <TextInput
-                        secureTextEntry={hide}
-                        value={passConf}
-                        onChangeText={(e) => setPassConf(e)}
-                        style={styles.txtInput}
-                        placeholder="Senha"
-                        placeholderTextColor={colors.whites[4]}
-                    />
-                    <Pressable
-                        style={styles.hidePassBtn}
-                        onPress={() => setHide(!hide)}
-                    >
-                        <Text>{hideTxt}</Text>
-                    </Pressable>
-                </View>
-                <Pressable style={styles.submitBtn} onPress={submit}>
-                    <Text style={[styles.whiteTxt, { textAlign: "center" }]}>
-                        Criar conta
-                    </Text>
-                </Pressable>
                 {res && (
-                    <View style={styles.blueCard}>
+                    <View style={[styles.blueCard, { width: "100%" }]}>
                         <Text>{res}</Text>
                     </View>
                 )}
-            </View>
 
+                <Pressable style={styles.submitBtn} onPress={submit}>
+                    <Text style={[styles.whiteTxt, { textAlign: "center" }]}>
+                        Entrar
+                    </Text>
+                </Pressable>
+            </View>
             <Text>
-                Quer entrar em uma conta? Aperte{" "}
-                <Pressable onPress={() => nav.navigate("LogIn")}>
+                Quer criar uma conta? Aperte{" "}
+                <Pressable onPress={() => nav.navigate("SignIn")}>
                     <Text style={{ color: "blue" }}>aqui</Text>
                 </Pressable>
             </Text>

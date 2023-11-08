@@ -1,11 +1,11 @@
 import { View, Text } from "react-native";
-import { auth } from "../../firebase";
+import { user } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../../styles";
 
 export function Home() {
     const nav = useNavigation();
-    if (!auth.currentUser) {
+    if (!user) {
         nav.navigate("SignIn");
     }
     return (
