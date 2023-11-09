@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
         gap: 16,
         padding: 16,
     },
+    main2: {
+        flex: 1,
+        backgroundColor: colors.whites[0],
+        gap: 16,
+        padding: 16,
+    },
     txtInput: {
         padding: 8,
         borderRadius: 8,

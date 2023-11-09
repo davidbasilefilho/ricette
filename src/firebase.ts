@@ -34,8 +34,10 @@ export function signIn(email: string, pass: string): string {
             res = "Success";
         })
         .catch((error) => {
-            console.error("Sign In error: ", error);
-            res = error.message;
+            if (error instanceof Error) {
+                console.error("Sign In error: ", error);
+                res = error.message;
+            }
         });
     return res != "" ? res : "unknown";
 }
@@ -48,10 +50,12 @@ export function logIn(email: string, pass: string): string {
             res = "Success";
         })
         .catch((error) => {
-            console.error("Log in error: ", error);
-            res = error.message;
+            if (error instanceof Error) {
+                console.error("Log in error: ", error);
+                res = error.message;
+            }
         });
-    return res != "" ? res : "unknown";
+    return res != "" ? res : "Unknown Status";
 }
 
 export function setOrCreateUserDocument(user: User, userData?: UserData) {
@@ -59,6 +63,7 @@ export function setOrCreateUserDocument(user: User, userData?: UserData) {
         doc(db, "users", user.uid),
         userData ??
             ({
+                uid: user.uid,
                 name: "",
                 saved: [],
                 likes: [],
@@ -70,18 +75,50 @@ export function setOrCreateUserDocument(user: User, userData?: UserData) {
 export async function getUserData(user: User): Promise<UserData | undefined> {
     if (user) {
         const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|;");
-            return docSnap.data as unknown as UserData;
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data as unknown as UserData;
+            }
+        } catch (e) {
+            if (e instanceof Error) {
+                console.error(e.message);
+            }
         }
     }
     return undefined;
 }
 
 export type UserData = {
+    uid: string;
     name: string;
     saved: string[];
     likes: string[];
     dislikes: string[];
 };
+
+// Firebase não quis funcionar então fiz um db fake
+let users: UserData[] | undefined = undefined;
+
+export function addUserDocument(user: User, userData: UserData) {
+    if (!users) {
+        users = [userData];
+    } else {
+        users = [...users, userData];
+    }
+}
+
+export function setUserDocument(uid: string, data: UserData) {
+    users?.forEach((user) => {
+        if (user.uid === uid) {
+            user.likes = data.likes;
+            user.name = data.name;
+            user.dislikes = data.dislikes;
+            user.saved = data.saved;
+        }
+    });
+}
+
+export function getUserDocumentById(uid: string): UserData | undefined {
+    return users?.find((user) => user.uid === uid);
+}

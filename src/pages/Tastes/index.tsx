@@ -4,7 +4,14 @@ import { useState } from "react";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { categorias } from "../../categoriasReceitas";
-import { getUserData, setOrCreateUserDocument, user } from "../../firebase";
+import {
+    addUserDocument,
+    getUserData,
+    getUserDocumentById,
+    setOrCreateUserDocument,
+    setUserDocument,
+    user,
+} from "../../firebase";
 
 export function Tastes() {
     const [categoriaId, setCategoriaId] = useState<number>(0);
@@ -13,11 +20,13 @@ export function Tastes() {
     const nav = useNavigation();
 
     const submit = () => {
-        setOrCreateUserDocument(user, {
-            name: "",
-            saved: [],
-            likes: categoriasLikes,
+        const data = getUserDocumentById(user.uid);
+        setUserDocument(user.uid, {
+            uid: data?.uid ?? user.uid,
+            name: data?.name ?? "",
             dislikes: categoriasDislikes,
+            likes: categoriasLikes,
+            saved: [],
         });
     };
 
@@ -31,14 +40,11 @@ export function Tastes() {
         submit();
     };
 
-    const addDislike = async () => {
-        const userData = await getUserData(user);
-        if (!userData?.likes.includes(categorias[categoriaId].uuid)) {
-            setCategoriasDislikes([
-                ...categoriasDislikes,
-                categorias[categoriaId].uuid,
-            ]);
-        }
+    const addDislike = () => {
+        setCategoriasDislikes([
+            ...categoriasDislikes,
+            categorias[categoriaId].uuid,
+        ]);
 
         if (categoriaId < categorias.length - 1) {
             setCategoriaId(categoriaId + 1);
@@ -79,7 +85,7 @@ export function Tastes() {
                             borderRadius: 12,
                             backgroundColor: colors.reds[3],
                         }}
-                        onPress={addDislike}
+                        onPress={() => addDislike()}
                     ></Pressable>
                     <View style={{ width: "100%" }}></View>
                     <Pressable
@@ -88,7 +94,7 @@ export function Tastes() {
                             borderRadius: 12,
                             backgroundColor: colors.greens[3],
                         }}
-                        onPress={addLike}
+                        onPress={() => addLike()}
                     ></Pressable>
                 </View>
             </>

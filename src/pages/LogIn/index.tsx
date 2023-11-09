@@ -1,6 +1,6 @@
 import { TextInput, View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { logIn, user } from "../../firebase";
+import { addUserDocument, logIn, user } from "../../firebase";
 import styles, { colors } from "../../styles";
 import { useEffect, useState } from "react";
 
@@ -13,9 +13,17 @@ export function LogIn() {
     const nav = useNavigation();
 
     const [res, setRes] = useState<string>("");
-    const submit = () => {
+    const submit = async () => {
         if (email && pass) {
-            setRes(logIn(email, pass));
+            setRes(await logIn(email, pass));
+            addUserDocument(user, {
+                uid: user.uid,
+                dislikes: [],
+                likes: [],
+                name: "",
+                saved: [],
+            });
+
             if (user) nav.navigate("Tastes");
         }
     };

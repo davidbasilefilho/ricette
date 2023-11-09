@@ -149,4 +149,128 @@ export const receitas: Receita[] = [
             "Leve ao forno para gratinar, em fogo médio, por 20 minutos ou até que o queijo esteja derretido",
         ],
     },
+    {
+        uuid: randomUUID(),
+        title: "Rocambole de carne moída",
+        categoriaId: categorias[2].uuid,
+        imageUrl:
+            "https://static.itdg.com.br/images/640-400/f756b5f3d39efb6a507b6646bc2463ad/298322-original.jpg",
+        ingredients: [
+            "1/2 kg de carne moída",
+            "1 pacote de sopa de cebola",
+            "presunto fatiado",
+            "queijo fatiado",
+            "tempero verde",
+            "sal a gosto",
+        ],
+        tutorial: [
+            "Tempere a carne moída com a sopa de cebola, o tempero verde e o sal.",
+            "Coloque a carne temperada sobre uma folha de papel laminado ou papel manteiga e abra a massa com um rolo, na espessura de 1 cm, mais ou menos.",
+            "Forre a carne com o presunto e o queijo, pode-se colocar também milho verde, ervilha e requeijão.",
+            "Enrole a carne, com ajuda da folha de papel laminado ou manteiga, em forma de rocambole.",
+            "Leve ao forno, em temperatura alta, por mais ou menos 30 minutos, ou no microondas por 15 minutos",
+        ],
+    },
+    {
+        uuid: randomUUID(),
+        title: "Quibe",
+        categoriaId: categorias[2].uuid,
+        imageUrl:
+            "https://static.itdg.com.br/images/640-400/d08483f3da1421b601d8027e34038f07/49815-original.jpg",
+        ingredients: [
+            "500 g de trigo para kibe",
+            "500 g de carne moída (patinho de preferência)",
+            "750 ml de água fervendo",
+            "2 cebolas ralada ou bem picadinha",
+            "hortelã, pimenta-de-cheiro e sal a gosto",
+        ],
+        tutorial: [
+            "Coloque o trigo em uma forma de bolo, para espalhar bem.",
+
+            "Despeje a água fervendo e deixe tampado com um pano de prato por 40 minutos, (a quantidade de água tem quer ser essa, por que não precisa escorrer).",
+
+            "Coloque a carne moída os temperos o sal e misture bem.",
+
+            "Enrole no formato de quibe, frite em óleo quente ou asse no forno recheando com catupiry - fica uma delícia.",
+        ],
+    },
+
+    {
+        uuid: randomUUID(),
+        title: "Repolho refogado",
+        categoriaId: categorias[0].uuid,
+        imageUrl:
+            "https://static.itdg.com.br/images/640-400/555c37d5c725f19cfadb0a2e2952189a/121804-original.jpg",
+        ingredients: [
+            "1 repolho lavado e fatiado fino",
+            "1 dente de alho",
+            "2 colheres de azeite doce",
+            "Sal a gosto",
+            "1 lata de ervilha",
+            "1 lata de milho",
+            "Salsinha a gosto",
+        ],
+        tutorial: [
+            "Em uma panela coloque o azeite e o alho batido, deixe aquecer levemente.",
+
+            "Acrescente o repolho e mexa até murchar um pouco.",
+
+            "Salpique sal e coloque o milho, ervilha, salsinha picada, abafe um pouco com a tampa e desligue o fogo.",
+
+            "Pode servi com arroz branco e frango assado.",
+        ],
+    },
+    {
+        uuid: randomUUID(),
+        title: "Salada tropical",
+        categoriaId: categorias[0].uuid,
+        imageUrl:
+            "https://static.itdg.com.br/images/640-400/439e1e353fc3b45e198d9c26cd6af38b/10072-original.jpg",
+        ingredients: [
+            "alface crespa",
+            "alface lisa",
+            "rúcula",
+            "agrião",
+            "endívia",
+            "100 g azeitonas verdes",
+            "100 g repolho roxo em tiras",
+            "1 cenoura ralada em tiras",
+            "1 pepino fatiado",
+            "100 g queijo parmesão em lascas",
+            "100 g tomate seco",
+            "12 ovos de codorna",
+            "1 vidro palmito",
+            "150 g peito de peru fatiado",
+            "1 manga fatiada",
+        ],
+        tutorial: [
+            "Lave bem as folhagens e cubra o fundo de uma travessa.",
+            "Corte o palmito e o peito de peru em rodelas.",
+            "Adicione os ingredientes sobre as folhas, deixe o repolho e a cenoura para o final.",
+            "Sirva com molho de iogurte batido com ervas finas e azeite a gosto.",
+        ],
+    },
+    {
+        uuid: randomUUID(),
+        title: "Souflé de Legumes",
+        categoriaId: categorias[0].uuid,
+        imageUrl:
+            "https://static.itdg.com.br/images/640-400/d69e50331c57a4d807f226c1be1cf8ee/38691-original.jpg",
+        ingredients: [
+            "2 colheres (sopa) de farinha de trigo",
+            "300 ml de leite",
+            "2 colheres (sopa) de manteiga ou margarina",
+            "1 pitada de sal",
+            "50 g de queijo ralado",
+            "4 ovos",
+            "legumes cozidos e cortados em cubos",
+        ],
+        tutorial: [
+            "Derreta a manteiga, sem deixar esquentar muito.",
+            "Junte a farinha, o sal e o leite e mexa sempre até engrossar.",
+            "Retire do fogo e deixe esfriar.",
+            "Misture as gemas bem batidas, o queijo e os legumes.",
+            "Por fim, acrescente as claras em neve.",
+        ],
+    },
 ];
